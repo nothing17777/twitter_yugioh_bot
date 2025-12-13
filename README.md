@@ -1,6 +1,6 @@
 # 🃏 Yu-Gi-Oh! Twitter Bot
 
-A lightweight Python bot that summons a random **Yu-Gi-Oh!** card and tweets it to the world. It automatically fetches card details and artwork from the [YGOProDeck API](https://db.ygoprodeck.com/api-guide/) and posts them to your Twitter account.
+A lightweight Python bot that summons a random **Yu-Gi-Oh!** card and tweets it to the world. It automatically fetches card details from the [YGOProDeck API](https://db.ygoprodeck.com/api-guide/) and posts them to your Twitter account.
 
 ---
 
@@ -58,9 +58,10 @@ python main.py
 
 The bot will:
 1.  Fetch a random card.
-2.  Download the card image locally.
-3.  Upload the image and tweet the card details.
-4.  Print the Tweet URL or status to the console.
+2.  Format the card data into a tweet.
+3.  **Post to Twitter** (Includes card stats and a link to the card image).
+
+*Note: Due to Twitter Free Tier limitations, this bot uses "Link Previews" to display images instead of native media uploads.*
 
 ---
 
@@ -71,15 +72,14 @@ The bot will:
 | `main.py` | **Entry Point**. Orchestrates the fetching and tweeting process. |
 | `config.py` | Handles Twitter authentication and API connection. |
 | `yugioh.py` | Wrapper for the YGOProDeck API to fetch card data. |
-| `format.py` | Formats the tweet text and handles image downloading/resizing. |
-| `cardImages/` | Directory for temporary image storage. |
+| `format.py` | Formats the tweet text. |
 | `.env` | **Secret**. Stores your API keys (Ignored by Git). |
 
 ---
 
 ## 🔗 Credits
 
-*   Card Data & Images provided by the [YGOProDeck API](https://db.ygoprodeck.com/api-guide/).
+*   Card Data provided by the [YGOProDeck API](https://db.ygoprodeck.com/api-guide/).
 *   Twitter integration via [Tweepy](https://www.tweepy.org/).
 
 ---

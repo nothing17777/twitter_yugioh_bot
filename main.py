@@ -7,8 +7,8 @@ if __name__ == "__main__":
     cardData = yugioh.cleanCardData(card)
     tweetText = format.format_tweet(cardData)
     # Append the image URL to the tweet text so Twitter generates a preview
-    #if "image" in cardData:
-    #    tweetText += f"\n{cardData['image']}"
+    if "image" in cardData:
+        tweetText += f"\n{cardData['image']}"
 
     print(tweetText)
     config.client.create_tweet(text=tweetText)
