@@ -1,45 +1,87 @@
-# Yu-Gi-Oh! Twitter Bot 🃏
+# 🃏 Yu-Gi-Oh! Twitter Bot
 
-A simple Python bot that tweets a random Yu-Gi-Oh! card every time you run it. It fetches card data from the YGOProDeck API and posts the card name, type, description, and image to Twitter.
+A lightweight Python bot that summons a random **Yu-Gi-Oh!** card and tweets it to the world. It automatically fetches card details and artwork from the [YGOProDeck API](https://db.ygoprodeck.com/api-guide/) and posts them to your Twitter account.
 
-## Prerequisites
+---
 
-- Python 3.8+
-- A Twitter Developer Account (with Read and Write permissions)
+## 📋 Prerequisites
 
-## Setup
+Before you start, ensure you have the following:
 
-1.  **Clone or Download this folder.**
+*   **Python 3.8** or higher installed.
+*   A **Twitter Developer Account** with an App created.
+*   **"Read and Write"** permissions enabled for your Twitter App.
 
-2.  **Install Dependencies:**
-    Open your terminal/command prompt in this folder and run:
+---
+
+## 🚀 Setup Guide
+
+### 1. Clone the Repository
+Download the project code to your local machine:
+```bash
+git clone https://github.com/nothing17777/twitter_yugioh_bot.git
+cd twitter_yugioh_bot
+```
+
+### 2. Install Dependencies
+Install the required Python libraries using `pip`:
+```bash
+pip install -r requirements.txt
+```
+
+### 3. Configure Credentials
+The bot needs your Twitter API keys to work.
+
+1.  Rename the example environment file:
     ```bash
-    pip install -r requirements.txt
+    mv .env.example .env
+    ```
+2.  Open `.env` in a text editor and paste your credentials:
+    ```env
+    API_KEY=your_consumer_key_here
+    API_SECRET=your_consumer_secret_here
+    ACCESS_TOKEN=your_access_token_here
+    ACCESS_TOKEN_SECRET=your_access_token_secret
     ```
 
-3.  **Configuration:**
-    - Rename `.env.example` to `.env`.
-    - Open `.env` and paste your Twitter API credentials:
-        ```env
-        API_KEY=...
-        API_SECRET=...
-        ACCESS_TOKEN=...
-        ACCESS_TOKEN_SECRET=...
-        ```
-    *Note: Ensure your Twitter App has "Read and Write" permissions enabled in the Developer Portal.*
+> **⚠️ Important:** Make sure your keys allow **Write** access. If you get a 403 error, check your Twitter Developer Dashboard settings and regenerate your Access Tokens.
 
-## Usage
+---
 
-To post a new card to Twitter immediately, run:
+## ⚔️ Usage
+
+To summon a card (run the bot manually), simply execute:
 
 ```bash
 python main.py
 ```
 
-## Project Structure
+The bot will:
+1.  Fetch a random card.
+2.  Download the card image locally.
+3.  Upload the image and tweet the card details.
+4.  Print the Tweet URL or status to the console.
 
-- `main.py`: The entry point. Coordinates fetching the card and posting the tweet.
-- `yugioh.py`: Handles fetching random card data from the API.
-- `format.py`: Formats the tweet text and handles image downloading.
-- `config.py`: Loads credentials and connects to the Twitter API.
-- `cardImages/`: Directory where temporary card images are saved.
+---
+
+## 📂 Project Structure
+
+| File | Description |
+| :--- | :--- |
+| `main.py` | **Entry Point**. Orchestrates the fetching and tweeting process. |
+| `config.py` | Handles Twitter authentication and API connection. |
+| `yugioh.py` | Wrapper for the YGOProDeck API to fetch card data. |
+| `format.py` | Formats the tweet text and handles image downloading/resizing. |
+| `cardImages/` | Directory for temporary image storage. |
+| `.env` | **Secret**. Stores your API keys (Ignored by Git). |
+
+---
+
+## 🔗 Credits
+
+*   Card Data & Images provided by the [YGOProDeck API](https://db.ygoprodeck.com/api-guide/).
+*   Twitter integration via [Tweepy](https://www.tweepy.org/).
+
+---
+
+*“It’s time to Duel!”*
