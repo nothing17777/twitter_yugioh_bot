@@ -11,3 +11,6 @@ env/
 
 # Mac system files
 .DS_Store
+
+# Generated Images
+cardImages/

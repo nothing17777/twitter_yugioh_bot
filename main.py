@@ -1,4 +1,6 @@
 import config, yugioh, format
+import schedule
+import time
 
 if __name__ == "__main__":
     card = yugioh.getRandomCard()
