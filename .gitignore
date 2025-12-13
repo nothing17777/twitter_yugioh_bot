@@ -1,0 +1,13 @@
+# Security: Ignore the .env file so secrets aren't shared
+.env
+
+# Python clutter
+__pycache__/
+*.pyc
+
+# Virtual Environment
+venv/
+env/
+
+# Mac system files
+.DS_Store
