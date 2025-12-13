@@ -61,7 +61,7 @@ The bot will:
 2.  Format the card data into a tweet.
 3.  **Post to Twitter** (Includes card stats and a link to the card image).
 
-*Note: Due to Twitter Free Tier limitations, this bot uses "Link Previews" to display images instead of native media uploads.*
+*Note: Due to Twitter Free Tier limitations, this bot does not support image uploads :( .*
 
 ---
 
