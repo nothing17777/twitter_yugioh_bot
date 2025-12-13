@@ -16,6 +16,7 @@ access_token_secret = os.getenv("ACCESS_TOKEN_SECRET", "").strip()
 # NOTE: We removed bearer_token here. For posting Tweets (User Context), 
 # we only need the consumer keys and access tokens.
 client = tweepy.Client(
+    bearer_token=bearer_token,
     consumer_key=api_key,
     consumer_secret=api_secret,
     access_token=access_token,
@@ -25,4 +26,4 @@ client = tweepy.Client(
 
 # 4. Set up the authentication for API (v1.1)
 auth = tweepy.OAuth1UserHandler(api_key, api_secret, access_token, access_token_secret)
-api = tweepy.API(auth, wait_on_rate_limit=True)
+v1_api = tweepy.API(auth, wait_on_rate_limit=True)

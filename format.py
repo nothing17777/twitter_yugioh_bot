@@ -29,6 +29,9 @@ def download_image(card_data):
         response = requests.get(image_url, timeout=10)
         response.raise_for_status()
         image = Image.open(BytesIO(response.content))
+        # Ensure directory exists
+        os.makedirs(os.path.dirname(IMAGE_PATH), exist_ok=True)
+        
         image.save(IMAGE_PATH)
         print("done saving image")
         return IMAGE_PATH
