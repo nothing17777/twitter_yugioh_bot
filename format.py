@@ -59,7 +59,7 @@ def format_tweet(card_data):
     header = f"🃏 {name}\nType: {card_type}\n\n"
     hashtags = "\n\n#YuGiOh #YuGiOhBot"
     
-    tweet_limit = 2000
+    tweet_limit = 250 # Reserve space for image URL (23 chars) and standard 280 limit
     reserved_space = len(header) + len(hashtags) + 3
     available_space = tweet_limit - reserved_space
     
