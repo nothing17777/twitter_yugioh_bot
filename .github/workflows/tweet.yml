@@ -2,7 +2,7 @@ name: Yu-Gi-Oh Twitter Bot
 
 on:
   schedule:
-    - cron: "0 16 * * *"  # runs daily at 16:00 UTC
+    - cron: "*/5 * * * *"
   workflow_dispatch:
 
 jobs:
