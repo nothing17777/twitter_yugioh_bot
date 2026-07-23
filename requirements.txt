@@ -1,5 +1,3 @@
-tweepy
-python-dotenv
 requests
-Pillow
-schedule
+pynacl
+python-dotenv
