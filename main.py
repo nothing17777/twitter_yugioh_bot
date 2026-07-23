@@ -9,7 +9,7 @@ CLIENT_ID = os.environ["CLIENT_ID"]
 CLIENT_SECRET = os.environ["CLIENT_SECRET"]
 REFRESH_TOKEN = os.environ["REFRESH_TOKEN"]
 GH_PAT = os.environ["GH_PAT"]
-REPO = os.environ["GITHUB_REPOSITORY"]  # auto-set by Actions, e.g. "user/repo"
+REPO = os.environ["GITHUB_REPOSITORY"]
 
 def refresh_access_token():
     resp = requests.post(
@@ -22,7 +22,7 @@ def refresh_access_token():
         auth=(CLIENT_ID, CLIENT_SECRET),
     )
     resp.raise_for_status()
-    return resp.json()  # contains access_token and new refresh_token
+    return resp.json()
 
 def update_github_secret(name, value):
     key_resp = requests.get(
@@ -43,10 +43,9 @@ def update_github_secret(name, value):
         json={"encrypted_value": encrypted_b64, "key_id": key_data["key_id"]},
     ).raise_for_status()
 
-def upload_image(access_token, image_url):
-    img_resp = requests.get(image_url, timeout=10)
-    img_resp.raise_for_status()
-    media_data = base64.b64encode(img_resp.content).decode("utf-8")
+def upload_image(access_token, image_path):
+    with open(image_path, "rb") as f:
+        media_data = base64.b64encode(f.read()).decode("utf-8")
 
     resp = requests.post(
         "https://api.x.com/2/media/upload",
@@ -79,12 +78,15 @@ if __name__ == "__main__":
     new_refresh_token = tokens.get("refresh_token", REFRESH_TOKEN)
 
     media_id = None
-    image_url = cardData.get("image") if cardData else None
-    if image_url:
+    image_path = format.download_image(cardData)
+    if image_path:
         try:
-            media_id = upload_image(access_token, image_url)
+            media_id = upload_image(access_token, image_path)
         except Exception as e:
             print(f"Error uploading image: {e}")
+        finally:
+            if os.path.exists(image_path):
+                os.remove(image_path)
 
     result = post_tweet(access_token, tweetText, media_id)
     print("Tweeted!", result)
