@@ -1,36 +1,28 @@
 name: Tweet Yu-Gi-Oh Card
+
 on:
   schedule:
     - cron: '0 */6 * * *'   # every 6 hours — adjust to taste
   workflow_dispatch: {}      # lets you trigger it manually from the Actions tab
+
 jobs:
   tweet:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+
       - name: Install dependencies
         run: pip install -r requirements.txt
-      - name: Debug env presence
-        run: |
-          echo "API_KEY length: ${#API_KEY}"
-          echo "API_SECRET length: ${#API_SECRET}"
-          echo "ACCESS_TOKEN length: ${#ACCESS_TOKEN}"
-          echo "ACCESS_TOKEN_SECRET length: ${#ACCESS_TOKEN_SECRET}"
-          echo "BEARER_TOKEN length: ${#BEARER_TOKEN}"
-        env:
-          API_KEY: ${{ secrets.API_KEY }}
-          API_SECRET: ${{ secrets.API_SECRET }}
-          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-          ACCESS_TOKEN_SECRET: ${{ secrets.ACCESS_TOKEN_SECRET }}
-          BEARER_TOKEN: ${{ secrets.BEARER_TOKEN }}
+
       - name: Post tweet
         env:
-          API_KEY: ${{ secrets.API_KEY }}
-          API_SECRET: ${{ secrets.API_SECRET }}
-          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-          ACCESS_TOKEN_SECRET: ${{ secrets.ACCESS_TOKEN_SECRET }}
-          BEARER_TOKEN: ${{ secrets.BEARER_TOKEN }}
+          CLIENT_ID: ${{ secrets.CLIENT_ID }}
+          CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
+          REFRESH_TOKEN: ${{ secrets.REFRESH_TOKEN }}
+          GH_PAT: ${{ secrets.GH_PAT }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
         run: python main.py
