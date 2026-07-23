@@ -77,18 +77,7 @@ if __name__ == "__main__":
     access_token = tokens["access_token"]
     new_refresh_token = tokens.get("refresh_token", REFRESH_TOKEN)
 
-    media_id = None
-    image_path = format.download_image(cardData)
-    if image_path:
-        try:
-            media_id = upload_image(access_token, image_path)
-        except Exception as e:
-            print(f"Error uploading image: {e}")
-        finally:
-            if os.path.exists(image_path):
-                os.remove(image_path)
-
-    result = post_tweet(access_token, tweetText, media_id)
+    result = post_tweet(access_token, tweetText)  # no media_id at all
     print("Tweeted!", result)
 
     if new_refresh_token != REFRESH_TOKEN:
